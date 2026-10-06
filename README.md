@@ -32,29 +32,25 @@ Each browser and URL has separate saved stock and settings. This example does no
 
 The inventory photos are included in [docs/inventory/](docs/inventory/). The app and its standard build use the bundled recipe snapshot; the original Obsidian vault is needed only to import newer notes. The historical `COCKTAIL-MATCHES.md` report retains links to its original Windows vault location.
 
-## Add to Git and continue development
+## Continue development on Linux
 
-For the first commit in this project's existing Git repository, review and commit the project:
-
-```sh
-git status --short
-git add .
-git diff --cached --stat
-git commit -m "Add Home Bar app and portable inventory example"
-```
-
-If you have not configured `origin`, connect your chosen remote and push the current branch (replace the URL placeholder):
+From the project root:
 
 ```sh
-git remote add origin <your-repository-url>
-git push -u origin HEAD
+npm run build
+npm test
+npm run dev
 ```
 
-Then clone that repository on Omarchy and follow the Linux run steps above. `.gitattributes` keeps source and shell scripts in LF format and Windows launchers in CRLF format. `.gitignore` excludes temporary research files, server logs/PIDs, local stock backups, environment files, and operating-system metadata. The example stock, recipe snapshot, generated app data, documentation, and inventory photos are included.
+Open **http://localhost:4173**. `npm run dev` and `npm start` run the same local server; Ctrl+C stops it. The server reads files on each request, so no restart is needed after editing browser code. It does not provide automatic browser reload. Rebuild after changes to refresh generated data and the offline cache, then reload the browser and apply **Update menu** if offered. When debugging cached assets, use the browser's developer tools to unregister the service worker temporarily.
+
+For a tablet on the same trusted Wi-Fi, use `npm run dev -- --lan --port=4174` and open the printed network address. You can also launch directly with `./scripts/start.sh`, including from another directory using its full path.
+
+This checkout is already a Git repository. Check `git status` and `git remote -v` before committing or pushing; no repository initialization is needed. `.gitattributes` keeps source and shell scripts in LF format and Windows launchers in CRLF format. `.gitignore` excludes temporary research files, server logs/PIDs, local stock backups, environment files, and operating-system metadata. The example stock, recipe snapshot, generated app data, documentation, and inventory photos are included.
 
 After editing the app or importing recipes, run the build and tests below so the offline cache updates too. The main development files are `public/app.mjs` (UI), `public/style.css` (styles), `public/matcher.mjs` (availability rules), and `scripts/catalog.mjs` (ingredient types and product aliases). The existing feature and hardware plans are in `PROJECT-PLAN.md` and `FRAME-PLAN.md`.
 
-## Run on this PC
+## Run on Windows
 
 Double-click **Start Bar Menu.cmd**, then open **http://localhost:4173**. The launcher finds Node.js on PATH or the bundled Codex Node runtime on this machine. Node.js 20 or later is required on another computer.
 

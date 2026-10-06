@@ -1,4 +1,4 @@
-const CACHE='home-bar-fa69d3fb3b25';
+const CACHE='home-bar-9f342daba836';
 const ASSETS=['./','./index.html','./style.css','./app.mjs','./matcher.mjs','./storage.mjs','./data/bar.json','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('message',event=>{if(event.data?.type==='ACTIVATE_UPDATE')self.skipWaiting();});
