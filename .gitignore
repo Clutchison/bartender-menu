@@ -1,0 +1,16 @@
+node_modules/
+tmp/
+.local/
+
+# Local stock exports; the example inventory in data/ stays tracked.
+data/inventory-backups/
+home-bar-stock-*.json
+
+# Local configuration and operating-system files.
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini

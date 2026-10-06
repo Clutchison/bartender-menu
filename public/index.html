@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#161d1c">
+  <meta name="description" content="Your home bar, matched to the ingredients on your shelf.">
+  <title>The Home Bar · What can we make?</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="The Home Bar home"><span class="brand-mark">HB</span><span>THE HOME BAR<small>FROM SHELF TO GLASS</small></span></a>
+    <nav aria-label="Main views"><button class="nav-button active" id="menu-tab" aria-pressed="true">Drink menu</button><button class="nav-button" id="inventory-tab" aria-pressed="false">Inventory <span id="stock-count"></span></button></nav>
+    <button id="install" class="quiet" hidden>Install app</button>
+    <button id="update-app" class="quiet" hidden>Update menu</button>
+  </header>
+  <main>
+    <section id="menu-view" aria-labelledby="page-title">
+      <div class="page-heading"><div><p class="eyebrow">A GOOD DRINK STARTS HERE</p><h1 id="page-title">What can we make?</h1><p class="intro">Your recipes. Your bottles. The possibilities, poured out.</p></div><span class="edition">HOME COLLECTION<br><b id="recipe-count">— recipes</b></span></div>
+      <div class="workspace">
+        <aside class="filters" aria-label="Drink filters">
+          <p class="eyebrow">ON THE MENU</p>
+          <label for="missing">Missing alcohol types allowed</label>
+          <div class="stepper"><button id="minus" aria-label="Allow one fewer missing alcohol type">−</button><input id="missing" type="number" min="0" step="1" value="0" inputmode="numeric" aria-describedby="missing-help"><button id="plus" aria-label="Allow one more missing alcohol type">+</button></div>
+          <p id="missing-help" class="help">0 means every alcoholic ingredient must be on hand. 1 includes drinks needing one more type.</p>
+          <div class="rule"></div>
+          <label class="switch-row" for="require-other"><span>Require non-alcoholic ingredients<small>Mixers, citrus, ice & garnishes</small></span><input id="require-other" type="checkbox" role="switch"><span class="switch" aria-hidden="true"></span></label>
+          <p class="help" id="other-help">Off · Mixers and other non-alcoholic ingredients are assumed available.</p>
+          <div class="rule"></div>
+          <label for="category">Recipe collection</label><select id="category"><option value="">All collections</option></select>
+          <div class="shelf-note"><span class="eyebrow">A NOTE FROM THE BAR</span><p>Brands can change.<br>The ingredient type stays.</p><small>Light, aged, spiced and overproof rum stay separate. So do vermouth styles and tequila ages.</small></div>
+          <button id="edit-stock" class="text-button">Update what’s on the shelf ↗</button>
+        </aside>
+        <div class="menu-results">
+          <div class="search-wrap"><label class="sr-only" for="search">Search drinks or ingredients</label><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a drink or ingredient…" autocomplete="off"></div>
+          <div class="results-heading"><h2 id="result-count" role="status" aria-live="polite">Loading your collection…</h2><span id="result-caption"></span></div>
+          <div id="results" class="drink-grid"></div>
+          <p id="review-note" class="subtle"></p>
+          <details id="review-list"><summary>Recipes needing ingredient review</summary><div id="review-recipes"></div></details>
+        </div>
+      </div>
+    </section>
+    <section id="inventory-view" hidden aria-labelledby="inventory-title">
+      <div class="page-heading"><div><p class="eyebrow">BEHIND THE BAR</p><h1 id="inventory-title">What’s on the shelf?</h1><p class="intro">Mark the types you have. Your menu updates as you go.</p></div><button id="back-menu" class="primary">See drink menu ↗</button></div>
+      <div class="inventory-toolbar"><div class="search-wrap"><label class="sr-only" for="inventory-search">Search inventory</label><span aria-hidden="true">⌕</span><input id="inventory-search" type="search" placeholder="Find an ingredient type or brand…"></div><label class="sr-only" for="inventory-kind">Inventory group</label><select id="inventory-kind"><option value="">All ingredients</option><option value="alcohol">Alcohol & bitters</option><option value="other">Mixers & other ingredients</option><option value="stocked">On the shelf</option></select></div>
+      <p class="subtle" id="inventory-note"></p>
+      <div id="inventory-list" class="inventory-grid"></div>
+      <div class="backup-bar"><p>Saved in this browser. Export a backup to move your stock to the tablet.</p><button id="export" class="quiet">Export stock</button><button id="import" class="quiet">Import stock</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
+    </section>
+    <div id="error" class="error" role="alert" hidden></div>
+  </main>
+  <footer><span>THE HOME BAR <span class="footer-divider">/</span> Made for what you have.</span><span id="connection">Local collection</span></footer>
+  <dialog id="recipe-dialog" aria-labelledby="recipe-title"><div class="dialog-top"><p class="eyebrow" id="recipe-category"></p><button id="close-recipe" class="close" aria-label="Close recipe">×</button></div><div id="recipe-content"></div></dialog>
+  <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">Replace this device’s stock?</h2><p id="import-summary"></p><div class="dialog-actions"><button id="cancel-import" class="quiet">Cancel</button><button id="confirm-import" class="primary">Replace stock</button></div></dialog>
+  <noscript><p>This app needs JavaScript enabled to match your recipes.</p></noscript>
+</body>
+</html>
